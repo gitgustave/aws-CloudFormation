@@ -1,0 +1,46 @@
+---
+Resources: 
+  nyInstances 
+    Typer ANS::EC2::Instance 
+    Propertiest 
+      Availabilityzooe: us-east-1a 
+      Imogeid: ani-Mic7edb2 
+      InstanceTypet t2.nicro 
+      SecurityGroupsa 
+     !Ref SSHSecurityGroup 
+     !Ref ServerSecurityGroup 
+
+# an elastic Ip for our insfance 
+
+MyEIP: 
+  Type: AWS::EC2::EIP 
+  Properties: 
+    InstanceId: !Ref MyInstance 
+
+# our EC2 security group 
+
+SSHSecurityGroup: 
+  Types: ASS::EC2::SecurityGroup 
+  Properties: 
+    GroupDescription: Enable SSH access via port 22 
+    SecurityGroupIngress: 
+    - CidrIp: .0.0.0/0 
+      FromPort: 22 
+      IpProtocol: tcp 
+      ToPort: 22 
+
+#our second EC2 security group 
+
+ServerSecrityGroupg:
+  Type: AWS::EC2::SecurityGroup 
+  Properties:
+    GroupDescription: allov connections from specified CIOR ranges 
+    SecurityGrouplngress: 
+    - IpProtocol: tcp 
+      FromPort: 80 
+      ToPort: 80 
+      Cidrips: 0.0.0.0/0 
+    - IpProtocol: tcp 
+      FromPort: 8080
+      ToPort: 8080
+      Cidrips: 0.0.0.0/0 
